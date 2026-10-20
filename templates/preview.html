@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% import "macros.html" as examples %}
+
+{% block title %}Page builder preview{% endblock %}
+
+{% block content %}
+<div class="page-builder">
+  <section class="builder-toolbar" aria-labelledby="builder-title">
+    <div class="builder-heading">
+      <div>
+        <p class="eyebrow">Template composer</p>
+        <h1 id="builder-title">Build a page preview</h1>
+        <p>Choose a header, hero, side navigation, and footer to see how they work together.</p>
+      </div>
+      <a class="builder-back-link" href="{{ url_for('home') }}">Browse all components <span aria-hidden="true">↗</span></a>
+    </div>
+    <form class="builder-controls" method="get" action="{{ url_for('preview') }}">
+      {% for component, label in [
+        ("header", "Header"),
+        ("hero", "Hero"),
+        ("side_nav", "Side navigation"),
+        ("footer", "Footer")
+      ] %}
+      <label class="builder-field" for="select-{{ component }}">
+        <span>{{ label }}</span>
+        <select id="select-{{ component }}" name="{{ component }}">
+          {% for value, option_label in option_lists[component] %}
+          <option value="{{ value }}" {% if selected[component] == value %}selected{% endif %}>{{ option_label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      {% endfor %}
+      <button class="button-link builder-submit" type="submit">Update preview <span aria-hidden="true">→</span></button>
+      <input type="hidden" name="show_content" value="0" />
+      <label class="builder-content-toggle">
+        <input type="checkbox" name="show_content" value="1" {% if show_content %}checked{% endif %} />
+        <span>Show sample content</span>
+      </label>
+      <input type="hidden" name="side_nav_toggle" value="0" />
+      <label class="builder-content-toggle" {% if not selected_macros.side_nav %}aria-disabled="true"{% endif %}>
+        <input
+          type="checkbox"
+          name="side_nav_toggle"
+          value="1"
+          {% if side_nav_toggle and selected_macros.side_nav %}checked{% endif %}
+          {% if not selected_macros.side_nav %}disabled{% endif %}
+        />
+        <span>Collapsible / mobile side nav</span>
+      </label>
+    </form>
+    <p class="builder-note">Selections are saved in the URL, so you can bookmark or share a combination.</p>
+    <div class="builder-presets">
+      <label class="builder-field" for="preset-select">
+        <span>Presets</span>
+        <select id="preset-select">
+          <option value="">Choose a preset</option>
+          <optgroup label="Built in">
+            <option value="builtin:startup">Startup landing page</option>
+            <option value="builtin:store">Boutique storefront</option>
+            <option value="builtin:restaurant">Restaurant</option>
+            <option value="builtin:portfolio">Creative portfolio</option>
+          </optgroup>
+          <optgroup id="saved-preset-options" label="Saved by you"></optgroup>
+        </select>
+      </label>
+      <button class="utility-button" id="load-preset" type="button">Load preset</button>
+      <label class="builder-field preset-name-field" for="preset-name">
+        <span>Name your preset</span>
+        <input id="preset-name" type="text" maxlength="48" placeholder="e.g. My landing page" />
+      </label>
+      <button class="utility-button" id="save-preset" type="button">Save current</button>
+      <button class="utility-button utility-button-subtle" id="delete-preset" type="button">Delete saved</button>
+      <p class="builder-status" id="builder-status" role="status" aria-live="polite"></p>
+    </div>
+    <fieldset class="theme-controls">
+      <legend>Try a color palette</legend>
+      {% for variable, color in theme_colors.items() %}
+      <label class="theme-color-field" for="color-{{ loop.index }}">
+        <input id="color-{{ loop.index }}" type="color" value="{{ color }}" data-theme-variable="{{ variable }}" />
+        <span>{{ variable }}</span>
+      </label>
+      {% endfor %}
+    </fieldset>
+  </section>
+
+  <div class="preview-size-controls" role="group" aria-label="Preview width">
+    <span>Preview size</span>
+    <button type="button" data-preview-size="desktop" aria-pressed="true">Desktop</button>
+    <button type="button" data-preview-size="tablet" aria-pressed="false">Tablet</button>
+    <button type="button" data-preview-size="mobile" aria-pressed="false">Mobile</button>
+  </div>
+  <div class="preview-frame">
+  <div class="preview-canvas" id="preview-canvas" data-preview-size="desktop">
+    <div class="preview-header">{{ selected_macros.header() }}</div>
+    <div class="preview-layout {% if selected_macros.side_nav and side_nav_toggle %}side-nav-layout{% endif %} {% if not selected_macros.side_nav %}preview-layout-no-nav{% endif %}">
+      {% if selected_macros.side_nav %}
+      {% if side_nav_toggle %}
+      <div class="preview-sidebar">{{ examples.sidenav_toggle(selected_macros.side_nav) }}</div>
+      {% else %}
+      <aside class="preview-sidebar">{{ selected_macros.side_nav() }}</aside>
+      {% endif %}
+      {% endif %}
+      <div class="preview-content">
+        {{ selected_macros.hero() }}
+        <section class="preview-below-hero" aria-label="Sample page content" {% if not show_content %}hidden{% endif %}>
+          <div class="preview-section-heading">
+            <p class="eyebrow">Made for your next step</p>
+            <h2>A little more of what matters.</h2>
+          </div>
+          {{ examples.extra_feature_cards() }}
+          {{ examples.extra_quote() }}
+          {{ examples.extra_cta() }}
+        </section>
+      </div>
+    </div>
+    <div class="preview-footer">{{ selected_macros.footer() }}</div>
+  </div>
+  </div>
+
+  <section class="selected-code" aria-labelledby="selected-code-title">
+    <div class="selected-code-heading">
+      <div>
+        <p class="eyebrow">Your current selection</p>
+        <h2 id="selected-code-title">Code for this page</h2>
+      </div>
+      <p>Only selected components are included, with their matching styles.</p>
+      <div class="code-copy-actions">
+        <button class="utility-button" type="button" data-copy-group="html">Copy all HTML / Jinja</button>
+        <button class="utility-button" type="button" data-copy-group="css">Copy all CSS</button>
+      </div>
+    </div>
+    {% for component, label in [
+      ("header", "Header"),
+      ("hero", "Hero"),
+      ("side_nav", "Side navigation"),
+      ("footer", "Footer")
+    ] %}
+    {% if selected_code[component] %}
+    <details class="code-card">
+      <summary>{{ label }} · {{ selected_labels[component] }}</summary>
+      <div class="code-card-content">
+        <button class="copy-code-button" type="button" data-copy-target="html-{{ component }}">Copy</button>
+        <pre><code id="html-{{ component }}" class="html-source">{{ selected_code[component] }}</code></pre>
+      </div>
+    </details>
+    {% endif %}
+    {% endfor %}
+    {% if selected_code.sample_content %}
+    <details class="code-card">
+      <summary>Sample content · Features, testimonial, and CTA</summary>
+      <div class="code-card-content">
+        <button class="copy-code-button" type="button" data-copy-target="html-sample_content">Copy</button>
+        <pre><code id="html-sample_content" class="html-source">{{ selected_code.sample_content }}</code></pre>
+      </div>
+    </details>
+    {% endif %}
+    {% if selected_code.side_nav_js %}
+    <details class="code-card">
+      <summary>Side navigation JavaScript · save as side-nav.js</summary>
+      <p class="code-copy-note">Copy this file alongside the HTML and selected side navigation styles to enable the drawer, desktop collapse, Escape-to-close, and backdrop behavior.</p>
+      <div class="code-card-content">
+        <button class="copy-code-button" type="button" data-copy-target="js-side-nav">Copy</button>
+        <pre><code id="js-side-nav" class="js-source">{{ selected_code.side_nav_js }}</code></pre>
+      </div>
+    </details>
+    {% endif %}
+
+    <h3 class="code-group-title">CSS</h3>
+    <details class="code-card">
+      <summary>Theme colors and shared styles</summary>
+      <div class="code-card-content">
+        <button class="copy-code-button" type="button" data-copy-target="css-shared">Copy</button>
+        <pre><code id="css-shared" class="css-source">{{ shared_css }}</code></pre>
+      </div>
+    </details>
+    {% for component, label in [
+      ("header", "Header"),
+      ("hero", "Hero"),
+      ("side_nav", "Side navigation"),
+      ("footer", "Footer")
+    ] %}
+    {% if selected_css[component] %}
+    <details class="code-card">
+      <summary>{{ label }} · {{ selected_labels[component] }} styles</summary>
+      <div class="code-card-content">
+        <button class="copy-code-button" type="button" data-copy-target="css-{{ component }}">Copy</button>
+        <pre><code id="css-{{ component }}" class="css-source">{{ selected_css[component] }}</code></pre>
+      </div>
+    </details>
+    {% endif %}
+    {% endfor %}
+    {% if selected_css.sample_content %}
+    <details class="code-card">
+      <summary>Sample content styles</summary>
+      <div class="code-card-content">
+        <button class="copy-code-button" type="button" data-copy-target="css-sample_content">Copy</button>
+        <pre><code id="css-sample_content" class="css-source">{{ selected_css.sample_content }}</code></pre>
+      </div>
+    </details>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='side-nav.js') }}" defer></script>
+<script src="{{ url_for('static', filename='preview.js') }}" defer></script>
+{% endblock %}

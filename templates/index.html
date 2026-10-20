@@ -1,0 +1,187 @@
+{% extends "base.html" %} {% import "macros.html" as examples %} {% block title
+%}Header examples{% endblock %} {% block content %}
+<main class="showcase">
+  <div class="showcase-intro" id="top">
+    <p class="eyebrow">Template library</p>
+    <h1>Good building blocks<br />for your next website.</h1>
+    <p>
+      Copy-ready patterns for headers, heroes, side navigation, footers, and
+      more.
+    </p>
+    <a class="preview-entry-link" href="{{ url_for('preview') }}"
+      >Try combinations in the page builder <span aria-hidden="true">→</span></a
+    >
+    <nav class="showcase-jump" aria-label="Jump to template category">
+      <a href="#headers">Headers</a>
+      <a href="#heroes">Heroes</a>
+      <a href="#side-navigation">Side navigation</a>
+      <a href="#footers">Footers</a>
+      <a href="#extras">More patterns</a>
+    </nav>
+  </div>
+
+  <section
+    class="template-section"
+    id="headers"
+    aria-labelledby="headers-title"
+  >
+    <div class="section-heading">
+      <p class="eyebrow">01 · Site navigation</p>
+      <h2 id="headers-title">Five headers</h2>
+      <p>Choose a starting point for your brand or storefront.</p>
+    </div>
+    <div class="example-list">
+      <article class="header-example" aria-labelledby="minimal-title">
+        <h2 id="minimal-title">01 <span>Minimal</span></h2>
+        {{ examples.header_minimal() }}
+      </article>
+
+      <article class="header-example" aria-labelledby="centered-title">
+        <h2 id="centered-title">02 <span>Centered</span></h2>
+        {{ examples.header_centered() }}
+      </article>
+
+      <article class="header-example" aria-labelledby="store-title">
+        <h2 id="store-title">03 <span>Storefront</span></h2>
+        {{ examples.header_announcement() }}
+      </article>
+
+      <article class="header-example" aria-labelledby="cta-title">
+        <h2 id="cta-title">04 <span>Call to action</span></h2>
+        {{ examples.header_call_to_action() }}
+      </article>
+
+      <article class="header-example" aria-labelledby="restaurant-title">
+        <h2 id="restaurant-title">05 <span>Restaurant</span></h2>
+        {{ examples.header_restaurant() }}
+      </article>
+    </div>
+  </section>
+
+  <section class="template-section" id="heroes" aria-labelledby="heroes-title">
+    <div class="section-heading">
+      <p class="eyebrow">02 · First impressions</p>
+      <h2 id="heroes-title">Five hero sections</h2>
+      <p>
+        Set the tone with an intro for your product, portfolio, event, or
+        business.
+      </p>
+    </div>
+    <div class="example-list">
+      <article class="header-example">
+        <h3 class="example-label">01 · Startup</h3>
+        {{ examples.hero_startup() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">02 · Portfolio</h3>
+        {{ examples.hero_portfolio() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">03 · Store</h3>
+        {{ examples.hero_store() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">04 · Event</h3>
+        {{ examples.hero_event() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">05 · Restaurant</h3>
+        {{ examples.hero_restaurant() }}
+      </article>
+    </div>
+  </section>
+
+  <section
+    class="template-section"
+    id="side-navigation"
+    aria-labelledby="sidenav-title"
+  >
+    <div class="section-heading">
+      <p class="eyebrow">03 · Find your way</p>
+      <h2 id="sidenav-title">Five side navigations</h2>
+      <p>
+        Layouts for dashboards, documentation, shops, creator pages, and support
+        centers.
+      </p>
+    </div>
+    <div class="sidenav-grid">
+      <article class="header-example">
+        <h3 class="example-label">01 · Dashboard</h3>
+        {{ examples.sidenav_dashboard() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">02 · Documentation</h3>
+        {{ examples.sidenav_docs() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">03 · Shop categories</h3>
+        {{ examples.sidenav_store() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">04 · Creator profile</h3>
+        {{ examples.sidenav_creator() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">05 · Help center</h3>
+        {{ examples.sidenav_support() }}
+      </article>
+    </div>
+  </section>
+
+  <section
+    class="template-section"
+    id="footers"
+    aria-labelledby="footers-title"
+  >
+    <div class="section-heading">
+      <p class="eyebrow">04 · A good ending</p>
+      <h2 id="footers-title">Five footers</h2>
+      <p>Simple, link-rich, newsletter, social, and contact-focused layouts.</p>
+    </div>
+    <div class="example-list">
+      <article class="header-example">
+        <h3 class="example-label">01 · Simple</h3>
+        {{ examples.footer_simple() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">02 · Link columns</h3>
+        {{ examples.footer_columns() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">03 · Newsletter</h3>
+        {{ examples.footer_newsletter() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">04 · Social links</h3>
+        {{ examples.footer_social() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">05 · Contact</h3>
+        {{ examples.footer_contact() }}
+      </article>
+    </div>
+  </section>
+
+  <section class="template-section" id="extras" aria-labelledby="extras-title">
+    <div class="section-heading">
+      <p class="eyebrow">05 · The finishing touches</p>
+      <h2 id="extras-title">And a little more</h2>
+      <p>Feature cards, a testimonial, and a closing call to action.</p>
+    </div>
+    <article class="header-example">
+      <h3 class="example-label">Feature cards</h3>
+      {{ examples.extra_feature_cards() }}
+    </article>
+    <div class="extras-grid">
+      <article class="header-example">
+        <h3 class="example-label">Testimonial</h3>
+        {{ examples.extra_quote() }}
+      </article>
+      <article class="header-example">
+        <h3 class="example-label">Call to action</h3>
+        {{ examples.extra_cta() }}
+      </article>
+    </div>
+  </section>
+</main>
+{% endblock %}

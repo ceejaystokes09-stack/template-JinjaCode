@@ -1,0 +1,357 @@
+{% macro header_minimal() %}
+<header class="site-header header-minimal">
+  <a class="brand" href="#" aria-label="Northstar home"
+    >northstar<span>.</span></a
+  >
+  <nav class="header-links" aria-label="Main navigation">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="header-link" href="#contact"
+    >Let's talk <span aria-hidden="true">↗</span></a
+  >
+</header>
+{% endmacro %} {% macro link(url, text) %}
+<a href="{{ url_for(url) }}">{{ text }}</a>
+{% endmacro %} {% macro header_centered() %}
+<header class="site-header header-centered">
+  <nav class="header-links" aria-label="Main navigation">
+    <a href="#shop">Shop</a>
+    <a href="#collections">Collections</a>
+  </nav>
+  <a class="brand" href="#" aria-label="Forma home">FORMA</a>
+  <nav class="header-links header-links-right" aria-label="Account navigation">
+    <a href="#journal">Journal</a>
+    <a href="#bag">Bag (0)</a>
+  </nav>
+</header>
+{% endmacro %} {% macro header_announcement() %}
+<header class="header-announcement-wrap">
+  <div class="announcement-bar">Complimentary shipping on orders over $75</div>
+  <div class="site-header header-store">
+    <a class="brand" href="#" aria-label="Fieldnote home"
+      ><span aria-hidden="true">✳</span> fieldnote</a
+    >
+    <nav class="header-links" aria-label="Main navigation">
+      <a href="#new">New arrivals</a>
+      <a href="#home">Home</a>
+      <a href="#garden">Garden</a>
+      <a href="#journal">Journal</a>
+    </nav>
+    <a class="header-link" href="#bag">Your bag (0)</a>
+  </div>
+</header>
+{% endmacro %} {% macro header_call_to_action() %}
+<header class="site-header header-cta">
+  <a class="brand" href="#" aria-label="Launchpad home"
+    ><span class="brand-mark">L</span> launchpad</a
+  >
+  <nav class="header-links" aria-label="Main navigation">
+    <a href="#features">Features</a>
+    <a href="#stories">Stories</a>
+    <a href="#pricing">Pricing</a>
+  </nav>
+  <a class="button-link" href="#get-started"
+    >Get started <span aria-hidden="true">→</span></a
+  >
+</header>
+{% endmacro %} {% macro header_restaurant() %}
+<header class="site-header header-restaurant">
+  <a class="brand" href="#" aria-label="Supper home">supper<span>.</span></a>
+  <nav class="header-links" aria-label="Main navigation">
+    <a href="#menu">Menu</a>
+    <a href="#story">Our story</a>
+    <a href="#location">Location</a>
+  </nav>
+  <a class="button-link" href="#reservation">Book a table</a>
+</header>
+{% endmacro %} {% macro hero_startup() %}
+<section class="hero hero-startup">
+  <p class="eyebrow">A better way to work</p>
+  <h2>Make room for your <span>big ideas.</span></h2>
+  <p class="hero-copy">
+    One calm workspace for your projects, notes, and next great idea.
+  </p>
+  <div class="hero-actions">
+    <a class="button-link" href="#start"
+      >Start for free <span aria-hidden="true">→</span></a
+    >
+    <a class="text-link" href="#tour">Take a product tour</a>
+  </div>
+</section>
+{% endmacro %} {% macro hero_portfolio() %}
+<section class="hero hero-portfolio">
+  <p class="eyebrow">Independent designer · Brooklyn, NY</p>
+  <h2>Thoughtful design<br />for a changing world.</h2>
+  <p class="hero-copy">
+    I partner with ambitious teams to make digital products feel a little more
+    human.
+  </p>
+  <a class="text-link" href="#work"
+    >Explore selected work <span aria-hidden="true">↗</span></a
+  >
+</section>
+{% endmacro %} {% macro hero_store() %}
+<section class="hero hero-store">
+  <div class="hero-store-copy">
+    <p class="eyebrow">The everyday collection</p>
+    <h2>Good things,<br />made to last.</h2>
+    <p class="hero-copy">
+      Considered essentials for slower mornings and longer weekends.
+    </p>
+    <a class="button-link" href="#shop"
+      >Shop the collection <span aria-hidden="true">→</span></a
+    >
+  </div>
+  <div
+    class="hero-art hero-art-store"
+    aria-label="Decorative product artwork"
+    role="img"
+  >
+    <span>FORM<br />&amp; FIELD</span>
+  </div>
+</section>
+{% endmacro %} {% macro hero_event() %}
+<section class="hero hero-event">
+  <p class="eyebrow">One day. Many perspectives.</p>
+  <h2>Ideas worth<br />showing up for.</h2>
+  <p class="hero-copy">
+    Join makers, founders, and curious minds for a day of talks and good
+    conversation.
+  </p>
+  <div class="hero-actions">
+    <a class="button-link" href="#tickets">Get your ticket</a>
+    <span class="hero-meta">October 24 · Portland, OR</span>
+  </div>
+</section>
+{% endmacro %} {% macro hero_restaurant() %}
+<section class="hero hero-restaurant">
+  <p class="eyebrow">Seasonal kitchen · Open daily</p>
+  <h2>Gather around<br />something good.</h2>
+  <p class="hero-copy">
+    A neighborhood table for thoughtful cooking, local ingredients, and one more
+    glass.
+  </p>
+  <a class="button-link" href="#book">Find your table</a>
+</section>
+{% endmacro %} {% macro sidenav_dashboard() %}
+<nav class="side-nav side-nav-dashboard" aria-label="Dashboard navigation">
+  <a class="side-brand" href="#">orbit<span>●</span></a>
+  <p class="side-label">Workspace</p>
+  <a class="side-item is-active" href="#overview"><span>⌂</span> Overview</a>
+  <a class="side-item" href="#projects"
+    ><span>▧</span> Projects <span class="side-count">8</span></a
+  >
+  <a class="side-item" href="#inbox"
+    ><span>✉</span> Inbox <span class="side-count">3</span></a
+  >
+  <p class="side-label">Personal</p>
+  <a class="side-item" href="#settings"><span>⚙</span> Settings</a>
+  <a class="side-profile" href="#profile"
+    ><span class="avatar">JD</span
+    ><span>Jordan Davis<small>Free plan</small></span></a
+  >
+</nav>
+{% endmacro %} {% macro sidenav_docs() %}
+<nav class="side-nav side-nav-docs" aria-label="Documentation navigation">
+  <a class="side-brand" href="#">Acme <span>docs</span></a>
+  <label class="side-search"
+    ><span aria-hidden="true">⌕</span
+    ><input
+      type="search"
+      placeholder="Search docs"
+      aria-label="Search documentation"
+  /></label>
+  <p class="side-label">GETTING STARTED</p>
+  <a class="side-item is-active" href="#introduction">Introduction</a>
+  <a class="side-item" href="#quickstart">Quickstart</a>
+  <a class="side-item" href="#installation">Installation</a>
+  <p class="side-label">GUIDES</p>
+  <a class="side-item" href="#authentication">Authentication</a>
+  <a class="side-item" href="#api"
+    >API reference <span aria-hidden="true">↗</span></a
+  >
+</nav>
+{% endmacro %} {% macro sidenav_store() %}
+<nav class="side-nav side-nav-store" aria-label="Shop categories">
+  <a class="side-brand" href="#">FIELDNOTE</a>
+  <p class="side-label">SHOP BY ROOM</p>
+  <a class="side-item is-active" href="#all">All products</a>
+  <a class="side-item" href="#living">Living</a>
+  <a class="side-item" href="#bedroom">Bedroom</a>
+  <a class="side-item" href="#kitchen">Kitchen</a>
+  <a class="side-item" href="#objects">Objects</a>
+  <div class="side-note">
+    <strong>Thoughtfully made.</strong><br />Free shipping over $75.
+  </div>
+</nav>
+{% endmacro %} {% macro sidenav_creator() %}
+<nav class="side-nav side-nav-creator" aria-label="Creator profile navigation">
+  <div class="creator-avatar">AM</div>
+  <strong class="creator-name">Alex Morgan</strong>
+  <span class="creator-role">Writer &amp; photographer</span>
+  <a class="side-item is-active" href="#home"><span>⌂</span> Home</a>
+  <a class="side-item" href="#writing"><span>✎</span> Writing</a>
+  <a class="side-item" href="#gallery"><span>▦</span> Gallery</a>
+  <a class="side-item" href="#about"><span>◉</span> About</a>
+  <a class="creator-follow" href="#follow">Follow along ↗</a>
+</nav>
+{% endmacro %} {% macro sidenav_support() %}
+<nav class="side-nav side-nav-support" aria-label="Help center navigation">
+  <a class="side-brand" href="#"
+    ><span class="support-mark">?</span> help center</a
+  >
+  <p class="side-label">HOW CAN WE HELP?</p>
+  <a class="side-item is-active" href="#popular">Popular articles</a>
+  <a class="side-item" href="#account">Account &amp; profile</a>
+  <a class="side-item" href="#billing">Billing &amp; plans</a>
+  <a class="side-item" href="#troubleshooting">Troubleshooting</a>
+  <div class="side-note">
+    <strong>Still need a hand?</strong><br /><a href="#contact"
+      >Contact our support team →</a
+    >
+  </div>
+</nav>
+{% endmacro %}
+
+{% macro sidenav_toggle(nav) %}
+<aside class="side-nav-component" data-side-nav-component>
+  <button
+    class="side-nav-toggle"
+    type="button"
+    aria-controls="side-nav-panel"
+    aria-expanded="true"
+    data-side-nav-toggle
+  >
+    <span class="side-nav-toggle-icon" aria-hidden="true">☰</span>
+    <span class="side-nav-toggle-label">Hide navigation</span>
+  </button>
+  <button
+    class="side-nav-backdrop"
+    type="button"
+    aria-label="Close navigation"
+    tabindex="-1"
+    data-side-nav-close
+  ></button>
+  <div class="side-nav-drawer" id="side-nav-panel">{{ nav() }}</div>
+</aside>
+{% endmacro %} {% macro footer_simple() %}
+<footer class="site-footer footer-simple">
+  <a class="brand" href="#">northstar<span>.</span></a>
+  <p>Thoughtful work, made together.</p>
+  <span>© 2026 Northstar Studio</span>
+</footer>
+{% endmacro %} {% macro footer_columns() %}
+<footer class="site-footer footer-columns">
+  <div class="footer-intro">
+    <a class="brand" href="#">goodform</a>
+    <p>Useful things for everyday living.</p>
+  </div>
+  <div class="footer-column">
+    <strong>Explore</strong><a href="#shop">Shop all</a
+    ><a href="#story">Our story</a><a href="#journal">Journal</a>
+  </div>
+  <div class="footer-column">
+    <strong>Help</strong><a href="#faq">FAQs</a><a href="#shipping">Shipping</a
+    ><a href="#contact">Contact</a>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Goodform Goods</span><a href="#privacy">Privacy</a
+    ><a href="#social">Instagram ↗</a>
+  </div>
+</footer>
+{% endmacro %} {% macro footer_newsletter() %}
+<footer class="site-footer footer-newsletter">
+  <div>
+    <p class="eyebrow">A little note from us</p>
+    <h2>Good things, occasionally.</h2>
+    <p>New work, useful ideas, and no unnecessary noise.</p>
+  </div>
+  <form class="newsletter-form" action="#" method="get">
+    <label class="visually-hidden" for="newsletter-email">Email address</label
+    ><input
+      id="newsletter-email"
+      type="email"
+      placeholder="Your email address"
+    /><button type="submit">
+      Sign me up <span aria-hidden="true">→</span>
+    </button>
+  </form>
+  <span class="footer-legal"
+    >By subscribing, you agree to our privacy policy.</span
+  >
+</footer>
+{% endmacro %} {% macro footer_social() %}
+<footer class="site-footer footer-social">
+  <div>
+    <a class="brand" href="#">COMMON GROUND</a>
+    <p>Make yourself at home.</p>
+  </div>
+  <div class="footer-social-links">
+    <a href="#instagram">Instagram ↗</a><a href="#pinterest">Pinterest ↗</a
+    ><a href="#tiktok">TikTok ↗</a>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Common Ground</span><span>Made with care in California</span
+    ><a href="#terms">Terms &amp; privacy</a>
+  </div>
+</footer>
+{% endmacro %} {% macro footer_contact() %}
+<footer class="site-footer footer-contact">
+  <div>
+    <p class="eyebrow">Have a good one in mind?</p>
+    <h2>Let's make it happen.</h2>
+  </div>
+  <a class="footer-contact-link" href="mailto:hello@example.com"
+    >hello@example.com <span aria-hidden="true">↗</span></a
+  >
+  <div class="footer-bottom">
+    <span>© 2026 Studio Practice</span><a href="#linkedin">LinkedIn</a
+    ><a href="#instagram">Instagram</a><a href="#back-to-top">Back to top ↑</a>
+  </div>
+</footer>
+{% endmacro %} {% macro extra_feature_cards() %}
+<div class="feature-grid">
+  <article class="feature-card">
+    <span class="feature-icon">✳</span>
+    <h3>Stay focused</h3>
+    <p>Keep your priorities clear and your best work moving forward.</p>
+    <a href="#focus">Explore focus tools →</a>
+  </article>
+  <article class="feature-card">
+    <span class="feature-icon">↗</span>
+    <h3>Work together</h3>
+    <p>Bring the right people into the room, wherever they are.</p>
+    <a href="#team">Meet your team →</a>
+  </article>
+  <article class="feature-card">
+    <span class="feature-icon">♡</span>
+    <h3>Make it yours</h3>
+    <p>Shape a workspace that fits the way you think and create.</p>
+    <a href="#customize">See what's possible →</a>
+  </article>
+</div>
+{% endmacro %} {% macro extra_quote() %}
+<blockquote class="quote-card">
+  <span class="quote-mark" aria-hidden="true">“</span>
+  <p>Good design makes the complicated feel a little more human.</p>
+  <footer>
+    <span class="avatar">MC</span
+    ><span
+      ><strong>Morgan Chen</strong><small>Founder, Common Ground</small></span
+    >
+  </footer>
+</blockquote>
+{% endmacro %} {% macro extra_cta() %}
+<section class="cta-banner">
+  <div>
+    <p class="eyebrow">Ready when you are</p>
+    <h2>Make your next move a good one.</h2>
+    <p>Start building something you're proud of today.</p>
+  </div>
+  <a class="button-link" href="#get-started"
+    >Get started <span aria-hidden="true">→</span></a
+  >
+</section>
+{% endmacro %}
